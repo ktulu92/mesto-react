@@ -1,0 +1,13 @@
+.two-columns__main-text{
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  width: 80%;
+  min-width: 784px; 
+  justify-content: space-between;
+}
+
+  .two-columns__main-text p:nth-child(2){
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
