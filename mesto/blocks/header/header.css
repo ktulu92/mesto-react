@@ -9,11 +9,7 @@
     margin-right: auto;
   }
   
-  @media (max-width:768px){
-    .header{
-      max-width:584px; 
-  }
-  }
+ 
   
   @media (min-width: 600px) and (max-width: 991px) {
     .header{

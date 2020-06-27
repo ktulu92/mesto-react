@@ -1,44 +1,38 @@
 const popup = document.querySelector(".pop-up");
-const popupCloseButtons=document.querySelector(".pop-up__close-button");
+const popupCloseButton=document.querySelector(".pop-up__close-button");
 const popupOpenButton = document.querySelector(".profile__edit-button");
 
-const popupToggle = function () {
-    popup.classList.toggle("pop-up_opened");
+let profileTitle = document.querySelector(".profile__title"); // Нашли в DOM текст имени пользователя
+let profileSubtitle = document.querySelector(".profile__subtitle");  // Нашли в DOM текст описания пользователя
+
+let newProfileTitle = document.querySelector(".pop-up__input_type_name");
+let newProfileDescription = document.querySelector(".pop-up__input_type_description");
+
+
+
+
+const popupOpen = function(){
+  newProfileTitle.value = profileTitle.textContent;
+  newProfileDescription.value = profileSubtitle.textContent;
+  popup.classList.add("pop-up_opened");
 }
 
-popupCloseButtons.addEventListener('click',popupToggle);
-popupOpenButton.addEventListener('click',popupToggle);
+const popupClose = function(){
+  popup.classList.remove("pop-up_opened");
+}
+
+popupCloseButton.addEventListener('click',popupClose);
+popupOpenButton.addEventListener('click',popupOpen);
 
 
-
-console.log(
-    popup ,
-    popupCloseButtons,
-    popupOpenButton,
-
-);
-
-
-let popUpSubmitButton = document.querySelector(".pop-up__submit-button");
-
-let profileTitle = document.querySelector(".profile__title"); // Нашли в html текст имени пользователя
-let profileSubtitle = document.querySelector(".profile__subtitle");  // Нашли в html текст описания пользователя
-
-let newProfileTitle = document.querySelector(".pop-up__input-person-name");
-let newProfileDescription = document.querySelector(".pop-up__input_person-description");
-
+let formElement = document.querySelector(".pop-up__container");
+console.log(formElement)
 
 function changeProfileInfo(event){
     event.preventDefault(); 
-
-
-    
     profileTitle.textContent = newProfileTitle.value;
     profileSubtitle.textContent = newProfileDescription.value;
-    popupToggle()
-
-
-
+    popupClose()
 }
 
-popUpSubmitButton.addEventListener('click', changeProfileInfo);
+formElement.addEventListener('submit', changeProfileInfo);

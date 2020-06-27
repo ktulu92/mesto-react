@@ -1,7 +1,7 @@
 .profile__add-button{
     margin-right:0;
     background-color:#000000;
-    background: url(../../../images/Plus.svg) no-repeat 50%;
+    background: url(../../../images/plus.svg) no-repeat 50%;
     object-position: center;
     object-fit: none;
     min-width: 150px;
