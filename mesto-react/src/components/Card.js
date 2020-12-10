@@ -3,18 +3,18 @@ import React from "react";
 function Card(props) {
   function handleClick(){
     props.onClick(props.card)
-    debugger
+
   }
   
 
 
 
     return (
-        <>
+        
       <div className="template-element">
         <li className="element">
           <button className="element__delete-button"></button>
-          <img className="element__image" src={props.card.url} alt="" onClick={handleClick}/>
+          <img className="element__image" src={props.card.url} alt={props.card.name} onClick={handleClick}/>
           <div className="element__info">
             <h2 className="element__title">{props.card.name}</h2>
             <div className="element__like-container">
@@ -24,7 +24,7 @@ function Card(props) {
           </div>
         </li>
       </div>
-      </>
+      
     );
   
 }

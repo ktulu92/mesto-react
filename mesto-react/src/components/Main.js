@@ -8,7 +8,7 @@ function Main(props) {
   const [userName, setUserName] = React.useState("Имя пользователя");
   const [userInfo, setUserInfo] = React.useState("Информация о пользователе");
   const [userAvatar, setUserAvatar] = React.useState();
-  const [cards,setCards] = React.useState([])
+  const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
     api
@@ -20,44 +20,33 @@ function Main(props) {
       })
       .catch((err) => {
         console.log(err);
-      })
-    },[])
+      });
+  }, []);
 
-  
-    
-    
-    
-    
-    
-    ////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////
 
-    React.useEffect(() => {
-      api.getInitialCards().
-      then((cards) => {
+  React.useEffect(() => {
+    api.getInitialCards().then((cards) => {
+      const initialCards = cards.map((card) => {
+        return {
+          id: card._id,
+          url: card.link,
+          name: card.name,
+          likes: card.likes,
+        };
+      });
+      setCards(initialCards);
+      ////////////////////////////////////////////////////
+    });
+  }, []);
 
-       const initialCards =  
-       
-       cards.map((card) => {
-       
- return {
-   id:card._id,
-  url:card.link,
-   name:card.name,
-   likes:card.likes
- }       
- 
- })  
-       setCards(initialCards);
-       ////////////////////////////////////////////////////
+  return (
     
-   })
-   }, []);
-  
-   return (
     <main className="content">
       <section className="profile">
+        
         <div className="profile__container">
-          <img className="profile__avatar" src={userAvatar} />
+          <img className="profile__avatar" src={userAvatar} alt= {'userAvatar'} />
           <div className="profile__layout">
             <button
               className="profile__edit-avatar"
@@ -83,24 +72,12 @@ function Main(props) {
       </section>
 
       <ul className="elements">
-
-      {
-       
-cards.map((card)=>{
-
-  
-  return <Card key={card.id} card={card} onClick={props.onCardClick}/>  
-  
-  
-})
-       }
-          
-        
+        {cards.map((card) => {
+          return (<Card key={card.id} card={card} onClick={props.onCardClick} />);
+        })}
       </ul>
     </main>
   );
-  
 }
-
 
 export default Main;
