@@ -68,12 +68,12 @@ function App() {
   }
 
   function handleCardLike(card) {
-    debugger;
+   
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
       // Формируем новый массив на основе имеющегося, подставляя в него новую карточку
-      debugger;
+     
       console.log(cards);
       const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
 
@@ -92,7 +92,7 @@ function App() {
   }
 
   function handleAddCardSubmit(card) {
-    debugger;
+   
     api.addNewCard(card).then((cardData) => {
       setCards([cardData,...cards ]);
       closeAllPopups();
@@ -101,7 +101,7 @@ function App() {
 
   React.useEffect(() => {
     api.getInitialCards().then((cards) => {
-      debugger;
+     
 
       setCards(cards);
       ////////////////////////////////////////////////////
