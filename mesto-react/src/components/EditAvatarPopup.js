@@ -6,12 +6,13 @@ import PopupWithForm from "./PopupWithForm";
 
 
 export default function EditAvatarPopup (props){
-  const AvatarRef = useRef('');
+  const avatarRef = useRef('');
 
   function handleSubmit(e) {
     e.preventDefault()
     props.onUpdateAvatar({
-      avatar: AvatarRef.current.value})
+      avatar: avatarRef.current.value})
+      avatarRef.current.value = ''
     
   }
 
@@ -42,7 +43,7 @@ return(
         required
         id="pop-up__input_type_avatar-link"
         name="avatar-link"
-        ref={AvatarRef}
+        ref={avatarRef}
       />
       <span
         className="pop-up__error"

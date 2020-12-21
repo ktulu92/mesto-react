@@ -3,7 +3,7 @@ import PopupWithForm from "../components/PopupWithForm";
 
 function AddPlacePopup(props) {
   const [cardName, setCardName] = React.useState("");
-  const [CardLink, setCardLink] = React.useState("");
+  const [cardLink, setCardLink] = React.useState("");
 
   function handleCardName(e) {
     setCardName(e.target.value);
@@ -17,7 +17,7 @@ function AddPlacePopup(props) {
     e.preventDefault(
       props.onAddPlace({
         name: cardName,
-        link: CardLink,
+        link: cardLink,
       })
     );
   }
@@ -40,6 +40,7 @@ function AddPlacePopup(props) {
           id="pop-up__input_type_name"
           name="name"
           onChange={handleCardName}
+          value={cardName}
         />
         <span
           className="pop-up__error"
@@ -55,6 +56,7 @@ function AddPlacePopup(props) {
           id="pop-up__input_type_image-link"
           name="link"
           onChange={handleCardLink}
+          value={cardLink}
         />
         <span
           className="pop-up__error"

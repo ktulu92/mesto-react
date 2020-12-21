@@ -142,20 +142,26 @@ class Api {
       });
   }
 
-  editProfile(data) {
-    return fetch(`${this.url}` + "users/me", {
-      method: "PATCH",
-      headers: this.headers,
-      body: JSON.stringify({
-        name: data.name,
-        about: data.about,
-      }),
-    }).catch((err) => {
-      console.log("Запрос не выполнен", err);
-    });
-  }
-}
+  editProfile(data) { 
+    return fetch(`${this.url}` + "users/me", { 
+      method: "PATCH", 
+      headers: this.headers, 
+      body: JSON.stringify({ 
+        name: data.name, 
+        about: data.about, 
+      }), 
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
 
+      // если ошибка, отклоняем промис
+      return Promise.reject(`Ошибка: ${res.status}`);
+    }).catch((err) => { 
+      console.log("Запрос не выполнен", err); 
+    }); 
+  } 
+} 
 const urlData = "https://mesto.nomoreparties.co/v1/cohort-17/";
 const headersData = {
   authorization: "c9722db9-3ef8-471a-a8fd-61097de987b4",

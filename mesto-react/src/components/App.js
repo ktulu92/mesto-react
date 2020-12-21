@@ -29,8 +29,8 @@ function App() {
 
   //подшаманить server
   function handleUpdateUser(info) {
-    api.editProfile(info);
-    api.getProfileInfo().then((data) => {
+    api.editProfile(info)
+   .then((data) => {
       setCurrentUser(data);
       closeAllPopups();
     });
@@ -94,7 +94,7 @@ function App() {
   function handleAddCardSubmit(card) {
     debugger;
     api.addNewCard(card).then((cardData) => {
-      setCards([...cards, cardData]);
+      setCards([cardData,...cards ]);
       closeAllPopups();
     });
   }
