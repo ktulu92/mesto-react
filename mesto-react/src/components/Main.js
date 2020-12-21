@@ -1,52 +1,25 @@
 import { render } from "@testing-library/react";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import api from "../utils/api";
 import Card from "../components/Card";
 // import { initialCards } from "../utils/utils";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Main(props) {
-  const [userName, setUserName] = React.useState("Имя пользователя");
-  const [userInfo, setUserInfo] = React.useState("Информация о пользователе");
-  const [userAvatar, setUserAvatar] = React.useState();
-  const [cards, setCards] = React.useState([]);
-
-  React.useEffect(() => {
-    api
-      .getProfileInfo()
-      .then((data) => {
-        setUserName(data.name);
-        setUserInfo(data.about);
-        setUserAvatar(data.avatar);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  const currentUser = React.useContext(CurrentUserContext);
+  // const [userAvatar, setUserAvatar] = React.useState();
 
   ////////////////////////////////////////////////////////////////
 
-  React.useEffect(() => {
-    api.getInitialCards().then((cards) => {
-      const initialCards = cards.map((card) => {
-        return {
-          id: card._id,
-          url: card.link,
-          name: card.name,
-          likes: card.likes,
-        };
-      });
-      setCards(initialCards);
-      ////////////////////////////////////////////////////
-    });
-  }, []);
-
   return (
-    
     <main className="content">
       <section className="profile">
-        
         <div className="profile__container">
-          <img className="profile__avatar" src={userAvatar} alt= {'userAvatar'} />
+          <img
+            className="profile__avatar"
+            src={currentUser.avatar}
+            alt={"userAvatar"}
+          />
           <div className="profile__layout">
             <button
               className="profile__edit-avatar"
@@ -57,8 +30,8 @@ function Main(props) {
 
         <div className="profile__info">
           <div className="profile__name-container">
-            <h1 className="profile__title">{userName}</h1>
-            <p className="profile__subtitle">{userInfo}</p>
+            <h1 className="profile__title">{currentUser.name}</h1>
+            <p className="profile__subtitle">{currentUser.about}</p>
           </div>
           <button
             className="profile__edit-button"
@@ -72,8 +45,18 @@ function Main(props) {
       </section>
 
       <ul className="elements">
-        {cards.map((card) => {
-          return (<Card key={card.id} card={card} onClick={props.onCardClick} />);
+        {props.cards.map((card) => {
+          console.log(card);
+
+          return (
+            <Card
+              key={card._id}
+              card={card}
+              onClick={props.onCardClick}
+              onCardLike={props.onCardLike}
+              onCardDelete={props.onCardDelete}
+            />
+          );
         })}
       </ul>
     </main>
@@ -81,3 +64,16 @@ function Main(props) {
 }
 
 export default Main;
+
+// React.useEffect(() => {
+//   api
+//     .getProfileInfo()
+//     .then((data) => {
+//       setUserName(data.name);
+//       setUserInfo(data.about);
+//       setUserAvatar(data.avatar);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// }, []);
