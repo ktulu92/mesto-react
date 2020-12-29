@@ -2,14 +2,11 @@ import { render } from "@testing-library/react";
 import React, { useState, useEffect } from "react";
 import api from "../utils/api";
 import Card from "../components/Card";
-// import { initialCards } from "../utils/utils";
+
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Main(props) {
   const currentUser = React.useContext(CurrentUserContext);
-  // const [userAvatar, setUserAvatar] = React.useState();
-
-  ////////////////////////////////////////////////////////////////
 
   return (
     <main className="content">
@@ -64,16 +61,3 @@ function Main(props) {
 }
 
 export default Main;
-
-// React.useEffect(() => {
-//   api
-//     .getProfileInfo()
-//     .then((data) => {
-//       setUserName(data.name);
-//       setUserInfo(data.about);
-//       setUserAvatar(data.avatar);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// }, []);

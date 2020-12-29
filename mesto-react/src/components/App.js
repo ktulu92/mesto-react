@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-import logo from "../logo.svg";
-// import './App.css';
 import Header from "./Header";
 import Footer from "./Footer";
 import Main from "./Main";
 import ImagePopup from "./ImagePopup";
-import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import api from "../utils/api";
 import EditProfilePopup from "../components/EditProfilePopup";
@@ -27,10 +24,9 @@ function App() {
     });
   }, []);
 
-  //подшаманить server
+
   function handleUpdateUser(info) {
-    api.editProfile(info)
-   .then((data) => {
+    api.editProfile(info).then((data) => {
       setCurrentUser(data);
       closeAllPopups();
     });
@@ -68,19 +64,16 @@ function App() {
   }
 
   function handleCardLike(card) {
-   
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
       // Формируем новый массив на основе имеющегося, подставляя в него новую карточку
-     
+
       console.log(cards);
       const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
 
       // Обновляем стейт
-      console.log(newCards);
-
-      setCards(newCards);
+       setCards(newCards);
     });
   }
 
@@ -92,19 +85,16 @@ function App() {
   }
 
   function handleAddCardSubmit(card) {
-   
     api.addNewCard(card).then((cardData) => {
-      setCards([cardData,...cards ]);
+      setCards([cardData, ...cards]);
       closeAllPopups();
     });
   }
 
   React.useEffect(() => {
     api.getInitialCards().then((cards) => {
-     
-
       setCards(cards);
-      ////////////////////////////////////////////////////
+      
     });
   }, []);
 
